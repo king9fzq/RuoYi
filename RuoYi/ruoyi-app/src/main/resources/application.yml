@@ -1,0 +1,49 @@
+# Tomcat
+server:
+  port: 8080
+
+# DataSource
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/ry?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+      username: root
+      password: 123456
+      filters: stat,wall,slf4j,config
+      max-active: 100
+      initial-size: 1
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x' FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.ruoyi
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/system/*.xml
+  # 加载全局的配置文件
+  configLocation: classpath:mapper/mybatis-config.xml
+
+#activiti数据库类型
+activitidataType: mysql
+
+#打印sql
+logging:
+  level:
+    com.len.mapper: debug
+    org.activiti.engine.impl.persistence.entity: trace
